@@ -12,7 +12,7 @@
   --warn: #8a5a00;
   --radius: 12px;
   --shadow: 0 10px 30px rgba(21, 32, 40, 0.06);
-  --max: 920px;
+  --max: 980px;
   --font: "IBM Plex Sans JP", "Noto Sans JP", sans-serif;
 }
 
@@ -343,6 +343,114 @@ tr:last-child td {
 .article .panel + .panel,
 .article .panel + h2 {
   margin-top: 1rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hero-figure {
+  margin: 0;
+}
+
+.hero-figure img,
+.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.article-figure {
+  margin: 0 0 1.2rem;
+  max-width: 440px;
+}
+
+.lead-mark {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 0 0.8rem;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+}
+
+.choice-card,
+.place-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.choice-card {
+  padding: 1rem 1rem 1.1rem;
+}
+
+.choice-card:hover,
+.place-card:hover {
+  border-color: var(--brand);
+  color: var(--ink);
+}
+
+.choice-card img,
+.place-card img {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.place-card img {
+  width: 100%;
+  height: auto;
+}
+
+.choice-card strong,
+.place-card strong {
+  display: block;
+  margin: 0.7rem 0 0.25rem;
+}
+
+.choice-card span,
+.place-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.place-card {
+  padding-bottom: 0.9rem;
+}
+
+.place-card strong,
+.place-card span {
+  padding-inline: 0.9rem;
+}
+
+@media (max-width: 800px) {
+  .hero-grid,
+  .intro-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
