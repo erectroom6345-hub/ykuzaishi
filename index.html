@@ -38,10 +38,10 @@
             <p class="hero-kicker">薬剤師の条件仕分け</p>
             <h1>登録する前に、<br />3つだけ分ける。</h1>
             <p class="lead">
-              薬転職ナビは、薬剤師向け転職サービスの紹介サイトです。体験談を並べるのではなく、雇用・勤務先・年収の順に条件を分けてから、合う窓口だけを案内します。
+              薬転職ナビは、薬剤師向け転職サービスの紹介サイトです。雇用、勤務先、年収から、合う窓口を案内します。
             </p>
             <div class="actions">
-              <a class="btn btn-primary" href="#sort">条件をチェックする</a>
+              <a class="btn btn-primary" href="#sort">条件から選ぶ</a>
               <a class="btn btn-secondary" href="/compare/">比較表へ</a>
             </div>
           </div>
@@ -57,10 +57,7 @@
         <div class="intro-grid">
           <div class="panel">
             <p>
-              転職を考えている薬剤師が、サービスに登録する前に「自分は対象か」を確認するためのサイトです。比較表には、相談までの流れと年齢・転職時期などの条件を書いています。
-            </p>
-            <p>
-              運営はキネマティカ・ワークスです。現場の体験談や、年収・採用の保証は載せていません。掲載中の窓口へ進むリンクには、成果報酬型の広告を含みます。
+              転職を考えている薬剤師が、サービスに登録する前に対象条件を確認するためのサイトです。比較表には、相談までの流れと年齢、転職時期を書いています。
             </p>
           </div>
           <div class="panel">
@@ -75,33 +72,22 @@
       </section>
 
       <section class="section wrap" id="sort">
-        <h2>条件をチェックする</h2>
-        <p class="section-lead">当てはまるものにチェックすると、読むページが出ます。いくつでも選べます。</p>
-        <form class="filter-box" id="condition-filter">
-          <div class="filter-groups">
-            <fieldset>
-              <legend>雇用</legend>
-              <label class="check"><input type="checkbox" name="pick" value="fulltime" />正社員で探したい</label>
-              <label class="check"><input type="checkbox" name="pick" value="flexible" />パートや派遣も見る</label>
-            </fieldset>
-            <fieldset>
-              <legend>勤務先</legend>
-              <label class="check"><input type="checkbox" name="pick" value="pharmacy" />調剤薬局</label>
-              <label class="check"><input type="checkbox" name="pick" value="hospital" />病院</label>
-              <label class="check"><input type="checkbox" name="pick" value="drugstore" />ドラッグストア</label>
-            </fieldset>
-            <fieldset>
-              <legend>年収</legend>
-              <label class="check"><input type="checkbox" name="pick" value="salary" />額面の中身を確認したい</label>
-              <label class="check"><input type="checkbox" name="pick" value="nationwide" />勤務地を広げて探す</label>
-            </fieldset>
-          </div>
-          <div class="filter-result" id="filter-result" hidden>
-            <h3>この条件で読むページ</h3>
-            <ul class="list-links" id="filter-list"></ul>
-          </div>
-          <p class="section-lead" id="filter-empty">まだチェックがありません。</p>
-        </form>
+        <h2>条件から選ぶ</h2>
+        <p class="section-lead">項目を押すと、そのページへ進みます。</p>
+        <div class="card-grid">
+          <a class="choice-card" href="/guides/full-time/">
+            <strong>正社員</strong>
+            <span>年齢、転職時期、電話面談の条件</span>
+          </a>
+          <a class="choice-card" href="/guides/salary/">
+            <strong>年収</strong>
+            <span>基本給、賞与、残業、手当の見方</span>
+          </a>
+          <a class="choice-card" href="/guides/nationwide/">
+            <strong>全国・地方</strong>
+            <span>勤務地を広げて探す場合</span>
+          </a>
+        </div>
       </section>
 
       <section class="section wrap">
@@ -129,7 +115,7 @@
 
       <section class="section wrap">
         <h2>読みもの</h2>
-        <p class="section-lead">日記型のブログではなく、条件ごとの記事です。</p>
+        <p class="section-lead">条件ごとの記事です。</p>
         <ul class="list-links">
           <li>
             <a href="/compare/">転職サイト比較表 <span>相談の流れと対象条件</span></a>
@@ -140,44 +126,6 @@
         </ul>
       </section>
     </main>
-    <script>
-      const pages = {
-        fulltime: ["正社員で探したい", "年齢、転職時期、電話面談の条件", "/guides/full-time/"],
-        flexible: ["雇用形態を広げて見る", "正社員以外の区分があるサービスの見方", "/compare/"],
-        pharmacy: ["調剤薬局", "処方箋枚数、在宅、一人薬剤師", "/guides/workplace/pharmacy/"],
-        hospital: ["病院", "病棟、当直、急性期か療養か", "/guides/workplace/hospital/"],
-        drugstore: ["ドラッグストア", "調剤併設、営業時間、販売業務", "/guides/workplace/drugstore/"],
-        salary: ["年収の内訳", "基本給、賞与、残業、手当", "/guides/salary/"],
-        nationwide: ["全国・地方で探す", "勤務地を広げられる場合", "/guides/nationwide/"]
-      };
-      const form = document.getElementById("condition-filter");
-      const result = document.getElementById("filter-result");
-      const list = document.getElementById("filter-list");
-      const empty = document.getElementById("filter-empty");
-      function render() {
-        const picks = [...form.querySelectorAll("input:checked")].map((input) => input.value);
-        list.replaceChildren();
-        const seen = new Set();
-        picks.forEach((key) => {
-          const item = pages[key];
-          if (!item || seen.has(item[2])) return;
-          seen.add(item[2]);
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.href = item[2];
-          a.append(item[0]);
-          const span = document.createElement("span");
-          span.textContent = item[1];
-          a.append(span);
-          li.append(a);
-          list.append(li);
-        });
-        const has = seen.size > 0;
-        result.hidden = !has;
-        empty.hidden = has;
-      }
-      form.addEventListener("change", render);
-    </script>
 
     <footer class="site-footer">
       <div class="wrap">
