@@ -41,12 +41,13 @@
               薬転職ナビは、薬剤師向け転職サービスの紹介サイトです。体験談を並べるのではなく、雇用・勤務先・年収の順に条件を分けてから、合う窓口だけを案内します。
             </p>
             <div class="actions">
-              <a class="btn btn-primary" href="#sort">3つの仕分けを見る</a>
+              <a class="btn btn-primary" href="#sort">条件をチェックする</a>
               <a class="btn btn-secondary" href="/compare/">比較表へ</a>
             </div>
           </div>
           <figure class="hero-figure">
-            <img src="/img/pharmacy.jpg" width="640" height="427" alt="調剤棚の前で薬を確認している様子" />
+            <img src="/img/hero.jpg" width="640" height="427" alt="ノートとコーヒーが置かれた机" />
+            <figcaption class="photo-credit">写真: 6689062（Pixabay）</figcaption>
           </figure>
         </div>
       </section>
@@ -74,22 +75,33 @@
       </section>
 
       <section class="section wrap" id="sort">
-        <h2>登録前の3つの仕分け</h2>
-        <p class="section-lead">上から順に見ると、比較表で迷いにくくなります。</p>
-        <div class="card-grid">
-          <a class="choice-card" href="/guides/full-time/">
-            <strong>1. 雇用</strong>
-            <span>正社員か、パート・派遣も含むか。年齢と転職時期もここで確認します。</span>
-          </a>
-          <a class="choice-card" href="/guides/workplace/">
-            <strong>2. 勤務先</strong>
-            <span>調剤薬局、病院、ドラッグストア。行きたくないタイプも先に外します。</span>
-          </a>
-          <a class="choice-card" href="/guides/salary/">
-            <strong>3. 年収</strong>
-            <span>額面ではなく、基本給・賞与・残業・手当に分けて見ます。</span>
-          </a>
-        </div>
+        <h2>条件をチェックする</h2>
+        <p class="section-lead">当てはまるものにチェックすると、読むページが出ます。いくつでも選べます。</p>
+        <form class="filter-box" id="condition-filter">
+          <div class="filter-groups">
+            <fieldset>
+              <legend>雇用</legend>
+              <label class="check"><input type="checkbox" name="pick" value="fulltime" />正社員で探したい</label>
+              <label class="check"><input type="checkbox" name="pick" value="flexible" />パートや派遣も見る</label>
+            </fieldset>
+            <fieldset>
+              <legend>勤務先</legend>
+              <label class="check"><input type="checkbox" name="pick" value="pharmacy" />調剤薬局</label>
+              <label class="check"><input type="checkbox" name="pick" value="hospital" />病院</label>
+              <label class="check"><input type="checkbox" name="pick" value="drugstore" />ドラッグストア</label>
+            </fieldset>
+            <fieldset>
+              <legend>年収</legend>
+              <label class="check"><input type="checkbox" name="pick" value="salary" />額面の中身を確認したい</label>
+              <label class="check"><input type="checkbox" name="pick" value="nationwide" />勤務地を広げて探す</label>
+            </fieldset>
+          </div>
+          <div class="filter-result" id="filter-result" hidden>
+            <h3>この条件で読むページ</h3>
+            <ul class="list-links" id="filter-list"></ul>
+          </div>
+          <p class="section-lead" id="filter-empty">まだチェックがありません。</p>
+        </form>
       </section>
 
       <section class="section wrap">
@@ -126,11 +138,46 @@
             <a href="/guides/nationwide/">全国・地方で探したい <span>勤務地を広げられる場合</span></a>
           </li>
         </ul>
-        <p class="note">
-          白衣の写真や利用者の顔写真は使っていません。条件の図と文章で区別する方が、このサイトの役割に合うためです。
-        </p>
       </section>
     </main>
+    <script>
+      const pages = {
+        fulltime: ["正社員で探したい", "年齢、転職時期、電話面談の条件", "/guides/full-time/"],
+        flexible: ["雇用形態を広げて見る", "正社員以外の区分があるサービスの見方", "/compare/"],
+        pharmacy: ["調剤薬局", "処方箋枚数、在宅、一人薬剤師", "/guides/workplace/pharmacy/"],
+        hospital: ["病院", "病棟、当直、急性期か療養か", "/guides/workplace/hospital/"],
+        drugstore: ["ドラッグストア", "調剤併設、営業時間、販売業務", "/guides/workplace/drugstore/"],
+        salary: ["年収の内訳", "基本給、賞与、残業、手当", "/guides/salary/"],
+        nationwide: ["全国・地方で探す", "勤務地を広げられる場合", "/guides/nationwide/"]
+      };
+      const form = document.getElementById("condition-filter");
+      const result = document.getElementById("filter-result");
+      const list = document.getElementById("filter-list");
+      const empty = document.getElementById("filter-empty");
+      function render() {
+        const picks = [...form.querySelectorAll("input:checked")].map((input) => input.value);
+        list.replaceChildren();
+        const seen = new Set();
+        picks.forEach((key) => {
+          const item = pages[key];
+          if (!item || seen.has(item[2])) return;
+          seen.add(item[2]);
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = item[2];
+          a.append(item[0]);
+          const span = document.createElement("span");
+          span.textContent = item[1];
+          a.append(span);
+          li.append(a);
+          list.append(li);
+        });
+        const has = seen.size > 0;
+        result.hidden = !has;
+        empty.hidden = has;
+      }
+      form.addEventListener("change", render);
+    </script>
 
     <footer class="site-footer">
       <div class="wrap">

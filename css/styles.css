@@ -28,11 +28,24 @@ body {
   margin: 0;
   font-family: var(--font);
   color: var(--ink);
-  background:
-    radial-gradient(1200px 500px at 10% -10%, #dceff2 0%, transparent 55%),
-    radial-gradient(900px 400px at 100% 0%, #e7eef6 0%, transparent 50%),
-    var(--bg);
+  background-color: #efe6d6;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(15, 92, 110, 0.18), transparent 32%),
+    radial-gradient(circle at 92% 0%, rgba(184, 122, 46, 0.16), transparent 28%),
+    radial-gradient(circle at 70% 100%, rgba(11, 122, 90, 0.12), transparent 34%),
+    linear-gradient(180deg, #f6f0e4 0%, #e7eef0 55%, #f3efe6 100%);
   line-height: 1.7;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(21, 32, 40, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 80%);
 }
 
 a {
@@ -58,9 +71,9 @@ img {
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(10px);
-  background: rgba(243, 246, 248, 0.88);
-  border-bottom: 1px solid rgba(213, 222, 230, 0.8);
+  backdrop-filter: blur(12px);
+  background: rgba(246, 240, 228, 0.9);
+  border-bottom: 1px solid rgba(184, 148, 96, 0.28);
 }
 
 .site-header .inner {
@@ -457,10 +470,60 @@ tr:last-child td {
   padding-inline: 0.9rem;
 }
 
+.filter-box {
+  background: rgba(255, 252, 246, 0.92);
+  border: 1px solid rgba(184, 148, 96, 0.35);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.15rem 1.2rem;
+}
+
+.filter-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+}
+
+.filter-groups fieldset {
+  margin: 0;
+  padding: 0.8rem 0.9rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.filter-groups legend {
+  padding: 0 0.35rem;
+  font-weight: 700;
+}
+
+.check {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  margin-top: 0.45rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.check input {
+  margin-top: 0.35rem;
+  accent-color: var(--cta);
+}
+
+.filter-result {
+  margin-top: 1rem;
+}
+
+.filter-result[hidden] {
+  display: none;
+}
+
 @media (max-width: 800px) {
   .hero-grid,
   .intro-grid,
-  .card-grid {
+  .card-grid,
+  .filter-groups {
     grid-template-columns: 1fr;
   }
 }
