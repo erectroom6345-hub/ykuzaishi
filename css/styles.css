@@ -367,7 +367,18 @@ tr:last-child td {
 
 .article-figure {
   margin: 0 0 1.2rem;
-  max-width: 440px;
+  max-width: 720px;
+}
+
+.article-figure img {
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.photo-credit {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
 }
 
 .lead-mark {
@@ -420,7 +431,8 @@ tr:last-child td {
 
 .place-card img {
   width: 100%;
-  height: auto;
+  height: 190px;
+  object-fit: cover;
 }
 
 .choice-card strong,
