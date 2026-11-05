@@ -9,6 +9,8 @@
 | `/` | トップ |
 | `/compare/` | 3社比較（ファルマスタッフ・ファゲット・アイリード） |
 | `/guides/full-time/` | 正社員向け |
+| `/guides/salary/` | 年収の見方 |
+| `/guides/workplace/` | 勤務先タイプ（調剤・病院・ドラッグストア） |
 | `/guides/nationwide/` | 全国枠（セルワーク） |
 | `/about/` | 運営者情報（氏名・連絡先は要記入） |
 | `/privacy/` | プライバシーポリシー |

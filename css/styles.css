@@ -331,6 +331,20 @@ tr:last-child td {
   opacity: 0.85;
 }
 
+.article h2 {
+  margin: 1.75rem 0 0.55rem;
+  font-size: 1.2rem;
+}
+
+.article p {
+  margin: 0 0 0.85rem;
+}
+
+.article .panel + .panel,
+.article .panel + h2 {
+  margin-top: 1rem;
+}
+
 @media (max-width: 640px) {
   .hero {
     padding-top: 2.2rem;
